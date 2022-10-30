@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:beamer/beamer.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ import '../../states/category_controller.dart';
 import '../../states/select_image_controller.dart';
 import '../../constants/common_size.dart';
 import '../../widgets/warning_dialog.dart';
+import '../home/items_screen.dart';
 import 'multi_image_select.dart';
 
 class InputScreen extends StatefulWidget {
@@ -53,25 +55,27 @@ class _InputScreenState extends State<InputScreen> {
     _detailController.dispose();
     super.dispose();
   }
-
+///////////////////////////////////////////////////////////////
   void attemptCreateItem() async {
-    if (FirebaseAuth.instance.currentUser == null) return;
+    if (FirebaseAuth.instance.currentUser == null) return print("1");
     // 완료 버튼 클릭
     isCreatingItem = true;
+
     // setState 해줘야 인디케이터가 동작한다,
     setState(() {
       autoValidate = AutovalidateMode.always;
     });
 
+
     final form = _fbKey.currentState;
+  
     if (form == null || !form.validate()) {
       isCreatingItem = false;
-      return;
+      return print("2");
     }
     form.save();
     final inputValues = form.value;
     debugPrint(inputValues.toString());
-
     final String userKey = FirebaseAuth.instance.currentUser!.uid;
     final String userPhone = FirebaseAuth.instance.currentUser!.phoneNumber!;
     final String itemKey = ItemModel2.generateItemKey(userKey);
@@ -83,12 +87,12 @@ class _InputScreenState extends State<InputScreen> {
 
     if (images.isEmpty) {
       dataWarning(context, '확인', '이미지를 선택해주세요');
-      return;
+      return print("3");
     }
 
     if (CategoryController.to.currentCategoryInEng == 'none') {
       dataWarning(context, '확인', '카테고리를 선택해주세요');
-      return;
+      return print("4");
     }
 
     // uploading raw data and return the Urls,
@@ -115,8 +119,10 @@ class _InputScreenState extends State<InputScreen> {
     // await ItemService().createNewItem(itemModel, itemKey, userNotifier.user!.uid);
     await ItemService()
         .createNewItem(itemModel, itemKey, UserController.to.user.value!.uid);
-    Get.back();
-  }
+
+     Get.appUpdate();
+     Get.back();
+     }
 
   Future<bool> dataWarning(
       BuildContext context, String title, String msg) async {
@@ -151,9 +157,7 @@ class _InputScreenState extends State<InputScreen> {
                   Get.back();
                 },
                 style: TextButton.styleFrom(
-                  primary: Colors.black,
-                  // backgroundColor 는 기본으로 흰색으로 설정되어 있음,
-                  backgroundColor:
+                  foregroundColor: Colors.black, backgroundColor:
                       Theme.of(context).appBarTheme.backgroundColor,
                 ),
                 child: Text(
@@ -169,11 +173,11 @@ class _InputScreenState extends State<InputScreen> {
                     : Container(),
               ),
               actions: <Widget>[
-                TextButton(
-                  onPressed: attemptCreateItem,
+                TextButton(/////////////////////글완료버튼
+                  onPressed:
+                    attemptCreateItem,
                   style: TextButton.styleFrom(
-                    primary: Colors.black,
-                    backgroundColor:
+                    foregroundColor: Colors.black, backgroundColor:
                         Theme.of(context).appBarTheme.backgroundColor,
                     // 완료와 뒤로 버튼 사이즈를 조정함,
                     minimumSize: const Size(55, 40),
