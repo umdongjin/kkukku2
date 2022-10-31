@@ -107,6 +107,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
       itemImage: itemModel.imageDownloadUrls[0],
       itemTitle: itemModel.title,
       itemKey: newItemKey,
+      itemMeetTime: itemModel.meettime,
+      itemPlace: itemModel.place,
       itemAddress: itemModel.address,
       itemPrice: itemModel.price,
       sellerKey: itemModel.userKey,
@@ -167,46 +169,41 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(padding_08),
-                          child: Row(
+                          child: Row(  //본문
+
                             children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.favorite_border),
-                              ),
                               const VerticalDivider(
-                                thickness: 1,
                                 width: padding_08 * 2 + 1,
                                 indent: padding_08,
                                 endIndent: padding_08,
                               ),
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                // crossAxisAlignment: CrossAxisAlignment.auth,
-                                children: [
                                   Text(
-                                    itemModel.price.toString(),
-                                    style:
-                                        Theme.of(context).textTheme.bodyText1,
+                                    itemModel.title,
+                                    style: TextStyle(fontSize: 15, color: Colors.black),
                                   ),
-                                  Text(
-                                    itemModel.negotiable ? '가격제안가능' : '가격제안불가',
-                                    style: itemModel.negotiable
-                                        ? Theme.of(context)
-                                            .textTheme
-                                            .bodyText2!
-                                            .copyWith(color: Colors.blue)
-                                        : Theme.of(context).textTheme.bodyText2,
+                                  SizedBox(
+                                    width: 30,
                                   ),
-                                ],
-                              ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        '장소: ${itemModel.place}',
+                                        style: Theme.of(context).textTheme.caption,
+                                      ),
+                                      Text(
+                                        '시간: ${itemModel.meettime}',
+                                        style: Theme.of(context).textTheme.caption,
+                                      ),
+                                    ],
+                                  ),
                               Expanded(child: Container()),
                               TextButton(
                                 onPressed: () {
                                   _goToChatroom(itemModel, userModel);
                                 },
-                                child: const Text('채팅으로 거래하기'),
-                              ),
+                                child: const Text('채팅하기'),
+                             ),
                             ],
                           ),
                         ),
@@ -255,35 +252,40 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                                 ],
                               ),
                               _textGap,
-                              Text(
-                                itemModel.detail,
+                              Text(     /// 글내용
+                                "내용: ${itemModel.detail}",
                                 style: Theme.of(context).textTheme.bodyText1,
                               ),
                               _textGap,
-                              Text(
-                                '조회 1',
+                              ///////////////////////////
+                              Text("픽업 장소: ${itemModel.place}",////////////////////////////
                                 style: Theme.of(context).textTheme.caption,
                               ),
                               _textGap,
-                              _divider(2),
-                              MaterialButton(
-                                padding: EdgeInsets.zero,
-                                onPressed: () {
-                                  // 이메일로 처리하고 싶으면 flutter_email_sender 참고할 것
-                                  // https://pub.dev/packages/flutter_email_sender
-                                  logger.d('게시글을 신고합니다');
-                                },
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    '이 게시글 신고하기',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .button!
-                                        .copyWith(color: Colors.black87),
-                                  ),
-                                ),
+                              Text("픽업 시간: ${itemModel.meettime} 시",//////////////////////////// 픽업 시간
+                                style: Theme.of(context).textTheme.caption,
                               ),
+
+                              _textGap,
+                              _divider(2),
+                              // MaterialButton(
+                              //   padding: EdgeInsets.zero,
+                              //   onPressed: () {
+                              //     // 이메일로 처리하고 싶으면 flutter_email_sender 참고할 것
+                              //     // https://pub.dev/packages/flutter_email_sender
+                              //     logger.d('게시글을 신고합니다');
+                              //   },
+                              //   child: Align(
+                              //     alignment: Alignment.centerLeft,
+                              //     child: Text(
+                              //       '이 게시글 신고하기',
+                              //       style: Theme.of(context)
+                              //           .textTheme
+                              //           .button!
+                              //           .copyWith(color: Colors.black87),
+                              //     ),
+                              //   ),
+                              // ),
                               _divider(2),
                             ]),
                           ),
@@ -325,20 +327,20 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                                 ),
                                 SizedBox(
                                   width: _size!.width / 4,
-                                  child: MaterialButton(
-                                    // padding: EdgeInsets.zero,
-                                    onPressed: () {},
-                                    child: Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Text(
-                                        '더보기',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .button!
-                                            .copyWith(color: Colors.grey),
-                                      ),
-                                    ),
-                                  ),
+                                  // child: MaterialButton(
+                                  //   // padding: EdgeInsets.zero,
+                                  //   onPressed: () {},
+                                  //   child: Align(
+                                  //     alignment: Alignment.centerRight,
+                                  //     child: Text(
+                                  //       '더보기',
+                                  //       style: Theme.of(context)
+                                  //           .textTheme
+                                  //           .button!
+                                  //           .copyWith(color: Colors.grey),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ),
                               ],
                             ),
@@ -418,18 +420,15 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       appBar: AppBar(
                         centerTitle: true,
                         title: Text(
-                          'User ID : [${userModel.phoneNumber}]',
-                          style: TextStyle(
-                              color: isAppbarCollapsed
-                                  ? Colors.black87
-                                  : Colors.transparent),
+                          itemModel.title,
+                          style: Theme.of(context).textTheme.headline6,
                         ),
                         shadowColor: Colors.transparent,
                         backgroundColor: isAppbarCollapsed
                             ? Colors.white
-                            : Colors.transparent,
+                            : Colors.white,
                         foregroundColor:
-                            isAppbarCollapsed ? Colors.black87 : Colors.white,
+                            isAppbarCollapsed ? Colors.black87 : Colors.black87,
                       ),
                     ),
                   )
@@ -545,45 +544,45 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 SizedBox(
                   // 온도와 LinearProgressIndicator 를 가로 길이를 같게 하기위해서,
                   width: 42,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const FittedBox(
-                        child: Text(
-                          '37.5 °C',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueAccent),
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(1),
-                        child: LinearProgressIndicator(
-                          color: Colors.blueAccent,
-                          value: 0.365,
-                          minHeight: 3,
-                          backgroundColor: Colors.grey[200],
-                        ),
-                      )
-                    ],
-                  ),
+                  // child: Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.stretch,
+                  //   children: [
+                  //     const FittedBox(
+                  //       child: Text(
+                  //         '37.5 °C',
+                  //         style: TextStyle(
+                  //             fontWeight: FontWeight.bold,
+                  //             color: Colors.blueAccent),
+                  //       ),
+                  //     ),
+                  //     const SizedBox(height: 6),
+                  //     ClipRRect(
+                  //       borderRadius: BorderRadius.circular(1),
+                  //       child: LinearProgressIndicator(
+                  //         color: Colors.blueAccent,
+                  //         value: 0.365,
+                  //         minHeight: 3,
+                  //         backgroundColor: Colors.grey[200],
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
                 ),
                 const SizedBox(width: 6),
-                const ImageIcon(
-                  ExtendedAssetImageProvider('assets/imgs/happiness.png'),
-                  color: Colors.blue,
-                ),
+                // const ImageIcon(
+                //   ExtendedAssetImageProvider('assets/imgs/happiness.png'),
+                //   color: Colors.blue,
+                // ),
               ],
             ),
             const SizedBox(height: padding_08),
-            Text(
-              '신뢰온도',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2!
-                  .copyWith(decoration: TextDecoration.underline),
-            ),
+            // Text(
+            //   '신뢰온도',
+            //   style: Theme.of(context)
+            //       .textTheme
+            //       .bodyText2!
+            //       .copyWith(decoration: TextDecoration.underline),
+            // ),
           ],
         ),
         // Text('aaa'),

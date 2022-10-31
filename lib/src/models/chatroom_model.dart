@@ -32,7 +32,9 @@ class ChatroomModel2 {
   String itemImage;
   String itemTitle;
   String itemKey;
+  String itemMeetTime;
   String itemAddress;
+  String itemPlace;
   num itemPrice;
   String sellerKey;
   String buyerKey;
@@ -47,9 +49,11 @@ class ChatroomModel2 {
   DocumentReference? reference;
 
   ChatroomModel2({
+    required this.itemMeetTime,
     required this.itemImage,
     required this.itemTitle,
     required this.itemKey,
+    required this.itemPlace,
     required this.itemAddress,
     required this.itemPrice,
     required this.sellerKey,
@@ -69,7 +73,9 @@ class ChatroomModel2 {
         itemImage: json[DOC_ITEMIMAGE] ?? '',
         itemTitle: json[DOC_ITEMTITLE] ?? '',
         itemKey: json[DOC_ITEMKEY] ?? '',
+        itemMeetTime: json[DOC_ITEM_MEETTIME] ?? '',
         itemAddress: json[DOC_ITEMADDRESS] ?? '',
+        itemPlace: json[DOC_ITEMPLACE] ?? '',
         itemPrice: json[DOC_ITEMPRICE] ?? 0,
         sellerKey: json[DOC_SELLERKEY] ?? '',
         buyerKey: json[DOC_BUYERKEY] ?? '',
@@ -89,9 +95,11 @@ class ChatroomModel2 {
       );
 
   Map<String, dynamic> toJson() => {
+        DOC_ITEM_MEETTIME: itemMeetTime,
         DOC_ITEMIMAGE: itemImage,
         DOC_ITEMTITLE: itemTitle,
         DOC_ITEMKEY: itemKey,
+        DOC_ITEMPLACE: itemPlace,
         DOC_ITEMADDRESS: itemAddress,
         DOC_ITEMPRICE: itemPrice,
         DOC_SELLERKEY: sellerKey,

@@ -25,19 +25,14 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     debugPrint("************************* >>> build from MainScreen");
     return Scaffold(
-      floatingActionButton: ExpandableFab(
-        // distance between button and children,
-        distance: 90,
-        children: <Widget>[
-          MaterialButton(
+      floatingActionButton: FloatingActionButton( /// 글쓰기 버튼
             onPressed: () {
               Get.toNamed('/$ROUTE_INPUT');
             },
             shape: const CircleBorder(),
-            height: 48,
-            color: Theme.of(context).colorScheme.primary,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             child: const Icon(Icons.edit),
-          ),
+
           /*MaterialButton(
             onPressed: () {},
             shape: const CircleBorder(),
@@ -45,24 +40,40 @@ class _MainScreenState extends State<MainScreen> {
             color: Theme.of(context).colorScheme.primary,
             child: const Icon(Icons.input),
           ),*/
-          MaterialButton(
-            onPressed: () {},
-            shape: const CircleBorder(),
-            height: 48,
-            color: Theme.of(context).colorScheme.primary,
-            child: const Icon(Icons.add),
-          ),
-        ],
+          // MaterialButton(
+        //           //   onPressed: () {},
+        //           //   shape: const CircleBorder(),
+        //           //   height: 48,
+        //           //   color: Theme.of(context).colorScheme.primary,
+        //           //   child: const Icon(Icons.add),
+        //           // ),
+
       ),
       appBar: AppBar(
         // centerTitle: true,
-        title: Obx(
-          () => Text(
-              (UserController.to.userModel.value == null)
-                  ? ''
-                  : UserController.to.userModel.value!.phoneNumber,
-              style: Theme.of(context).appBarTheme.titleTextStyle),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text("배달을 반하다",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
+                    ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("ID:  " + UserController.to.userModel.value!.phoneNumber,
+                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                      ),
+                    ],
+                  ),
+
+                ],
         ),
+
         actions: [
           IconButton(
             onPressed: () {
@@ -88,13 +99,13 @@ class _MainScreenState extends State<MainScreen> {
       body: IndexedStack(
         index: _bottomSelectedIndex,
         children: <Widget>[
-          const ItemsScreen(),
+          const ItemsScreen(), // items_page
           (UserController.to.userModel.value == null)
               ? Container()
-              : MapScreen(UserController.to.userModel.value!),
-          (UserController.to.userModel.value == null)
-              ? Container()
-              : GoogleMapScreen(UserController.to.userModel.value!),
+              : MapScreen(UserController.to.userModel.value!), // 글목록
+          // (UserController.to.userModel.value == null)
+          //     ? Container()
+          //     : GoogleMapScreen(UserController.to.userModel.value!), // 내위치
           (UserController.to.userModel.value == null)
               ? Container()
               : ChatListPage(
@@ -107,6 +118,10 @@ class _MainScreenState extends State<MainScreen> {
         // 아이콘이 선택되지 않아도 label 이 보이게 하는 옵션
         // shifting 으로 설정하면 클릭시에만 label 이 보임,
         type: BottomNavigationBarType.fixed,
+        // showSelectedLabels: false,
+        // showUnselectedLabels: false,
+        // selectedItemColor: Colors.black,
+        // unselectedItemColor: Colors.black.withOpacity(.60),
         // 아이콘이 클릭되면 onTap 이 실행되고, 이걸 currentIndex 에 전달해야 함
         onTap: (index) {
           setState(() {
@@ -120,36 +135,18 @@ class _MainScreenState extends State<MainScreen> {
         items: [
           // 아이콘이 클릭되면 onTap 이 실행됨,
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(_bottomSelectedIndex == 0
-                ? 'assets/imgs/house_filled.png'
-                : 'assets/imgs/house.png')),
-            label: '글목록',
+            icon: Icon(Icons.home),
+            label: '홈',
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(_bottomSelectedIndex == 1
-                ? 'assets/imgs/near-me_filled.png'
-                : 'assets/imgs/near-me.png')),
-            label: '글목록',
+            icon:  Icon(Icons.room),
+            label: '내 근처',
           ),
+
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(_bottomSelectedIndex == 2
-                ? 'assets/imgs/near-me_filled.png'
-                : 'assets/imgs/near-me.png')),
-            label: '내위치',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(_bottomSelectedIndex == 3
-                ? 'assets/imgs/chat_filled.png'
-                : 'assets/imgs/chat.png')),
+            icon:  Icon(Icons.wechat_outlined),
             label: '채팅',
           ),
-          /*BottomNavigationBarItem(
-            // backgroundColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
-            icon: ImageIcon(AssetImage(_bottomSelectedIndex == 4
-                ? 'assets/imgs/user_filled.png'
-                : 'assets/imgs/user.png')),
-            label: 'me',
-          ),*/
         ],
       ),
     );

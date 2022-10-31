@@ -64,7 +64,7 @@ class AppleApp extends StatelessWidget {
     // ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-          backgroundColor: Colors.red, primary: Colors.white, minimumSize: const Size(10, 48)),
+          foregroundColor: Colors.white, backgroundColor: Colors.red, minimumSize: const Size(10, 48)),
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,

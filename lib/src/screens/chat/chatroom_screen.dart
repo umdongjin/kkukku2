@@ -154,55 +154,93 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                         fit: BoxFit.cover,
                       ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    // todo: 거래완료 여부 확인 필드 추가
-                    text: TextSpan(
-                        text: '글 제목',
-                        style: Theme.of(context).textTheme.bodyText1,
-                        children: [
-                          TextSpan(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RichText(
+                      // todo: 거래완료 여부 확인 필드 추가
+                      text: TextSpan(
+                          text: '제목 :',
+                          style: Theme.of(context).textTheme.bodyText1,
+                          children: [
+                            TextSpan(
+                                text: _chatroomModel.value == null
+                                    ? ''
+                                    : ' ' + _chatroomModel.value!.itemTitle,
+                                // text: ' 복숭아 떨이',
+                                style: Theme.of(context).textTheme.bodyText2)
+                          ]),
+                    ),
+                    SizedBox(
+                      height:2,
+                    ),
+                    RichText( // 픽업 장소
+                      text: TextSpan(
+                          text: '장소: ',
+                          style: Theme.of(context).textTheme.bodyText1,
+                          children: [
+                            TextSpan(
+                                text: _chatroomModel.value == null
+                                    ? ''
+                                    : ' ' + _chatroomModel.value!.itemPlace,//////////////
+                                // text: ' 복숭아 떨이',
+                                style: Theme.of(context).textTheme.bodyText2)
+                          ]),
+                    ),
+                    SizedBox(
+                      height:2,
+                    ),
+                    RichText( // 픽업 시간
+                      text: TextSpan(
+                          text: '시간: ',
+                          style: Theme.of(context).textTheme.bodyText1,
+                          children: [
+                            TextSpan(
+                                text: _chatroomModel.value == null
+                                    ? ''
+                                    : ' ' + _chatroomModel.value!.itemMeetTime ,//////////////
+                                // text: ' 복숭아 떨이',
+                                style: Theme.of(context).textTheme.bodyText2)
+                          ]),
+                    ),
+                    SizedBox(
+                      height:2,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                          text: _chatroomModel.value == null
+                              ? ''
+                              : '배달료: ' + _chatroomModel.value!.itemPrice.toCurrencyString(
+                                  mantissaLength: 0, trailingSymbol: '원'),
+                          style: Theme.of(context).textTheme.bodyText1,
+                          children: [
+                            TextSpan(
                               text: _chatroomModel.value == null
                                   ? ''
-                                  : ' ' + _chatroomModel.value!.itemTitle,
-                              // text: ' 복숭아 떨이',
-                              style: Theme.of(context).textTheme.bodyText2)
-                        ]),
-                  ),
-                  RichText(
-                    text: TextSpan(
-                        text: _chatroomModel.value == null
-                            ? ''
-                            : _chatroomModel.value!.itemPrice.toCurrencyString(
-                                mantissaLength: 0, trailingSymbol: '원'),
-                        style: Theme.of(context).textTheme.bodyText1,
-                        children: [
-                          TextSpan(
-                            text: _chatroomModel.value == null
-                                ? ''
-                                : _chatroomModel.value!.negotiable
-                                    ? '  (가격제안가능)'
-                                    : '  (가격제안불가)',
-                            style: _chatroomModel.value == null
-                                ? Theme.of(context)
-                                    .textTheme
-                                    .bodyText2!
-                                    .copyWith(color: Colors.black26)
-                                : _chatroomModel.value!.negotiable
-                                    ? Theme.of(context)
-                                        .textTheme
-                                        .bodyText2!
-                                        .copyWith(color: Colors.blue)
-                                    : Theme.of(context)
-                                        .textTheme
-                                        .bodyText2!
-                                        .copyWith(color: Colors.black26),
-                          )
-                        ]),
-                  ),
-                ],
+                                  : _chatroomModel.value!.negotiable
+                                      ? '  (배달비제안가능)'
+                                      : '  (배달비제안불가)',
+                              style: _chatroomModel.value == null
+                                  ? Theme.of(context)
+                                      .textTheme
+                                      .bodyText2!
+                                      .copyWith(color: Colors.black26)
+                                  : _chatroomModel.value!.negotiable
+                                      ? Theme.of(context)
+                                          .textTheme
+                                          .bodyText2!
+                                          .copyWith(color: Colors.blue)
+                                      : Theme.of(context)
+                                          .textTheme
+                                          .bodyText2!
+                                          .copyWith(color: Colors.black26),
+                            )
+                          ]),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

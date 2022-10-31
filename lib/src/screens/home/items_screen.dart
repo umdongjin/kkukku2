@@ -50,6 +50,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
 
   Widget _listView(double imgSize, List<ItemModel2> items) {
     return ListView.separated(
+      reverse: true,
       padding: const EdgeInsets.all(padding_16),
       separatorBuilder: (context, index) {
         return Divider(
@@ -96,12 +97,26 @@ class _ItemsScreenState extends State<ItemsScreen> {
                     children: <Widget>[
                       Text(_item.title,
                           style: Theme.of(context).textTheme.subtitle1),
+                      SizedBox(
+                        height: 3,
+                      ),
                       Text(
                         TimeCalculation.getTimeDiff(_item.createdDate),
                         // '50일전',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
-                      Text(_item.price.toString() + '원'),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Text('배달료: ' + _item.price.toString() + '원'),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Text('픽업 장소: ' + _item.place),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Text('픽업 시간: ' + _item.meettime),
                       // 금액과 하트 사이에 공백을 최대한 주기위해서 Expanded 사용함,
                       Expanded(child: Container()),
                       // Row 가 2번 사용된 이유는 아래와 같다.

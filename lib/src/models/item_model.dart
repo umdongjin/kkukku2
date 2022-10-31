@@ -44,7 +44,9 @@ class ItemModel2 {
   String userPhone;
   List<String> imageDownloadUrls;
   String title;
-  String category;
+  String place;
+  String category; //
+  String meettime;
   num price;
   bool negotiable;
   String detail;
@@ -56,7 +58,9 @@ class ItemModel2 {
 
   ItemModel2({
     required this.itemKey,
+    required this.meettime,
     required this.userKey,
+    required this.place,
     required this.userPhone,
     required this.imageDownloadUrls,
     required this.title,
@@ -73,6 +77,8 @@ class ItemModel2 {
 
   factory ItemModel2.fromJson(Map<String, dynamic> json) => ItemModel2(
         itemKey: json[DOC_ITEMKEY] ?? '',
+        place: json[DOC_PLACE] ?? '',
+        meettime: json[DOC_MEETTIME] ?? '',
         userKey: json[DOC_USERKEY] ?? '',
         userPhone: json[DOC_USERPHONE] ?? '',
         imageDownloadUrls: List<String>.from(json[DOC_IMAGEDOWNLOADURLS].map((x) => x)),
@@ -93,6 +99,8 @@ class ItemModel2 {
       );
 
   Map<String, dynamic> toJson() => {
+        DOC_PLACE: place,
+        DOC_MEETTIME: meettime,
         DOC_ITEMKEY: itemKey,
         DOC_USERKEY: userKey,
         DOC_USERPHONE: userPhone,

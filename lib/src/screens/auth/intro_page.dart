@@ -30,6 +30,7 @@ class IntroPage extends StatelessWidget {
         final sizeOfPosImg = imgSize * 0.1;
 
         return SafeArea(
+
           // 상태바 아래부터 , 아래 버튼위로 위젯이 위치시킴
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: padding_16),
@@ -44,11 +45,11 @@ class IntroPage extends StatelessWidget {
                       .copyWith(color: Theme.of(context).colorScheme.primary),
                 ),*/
                 SizedBox(
-                  width: imgSize,
-                  height: imgSize,
+                  width: 200,
+                  height: 200,
                   child: Stack(
                     children: <Widget>[
-                      ExtendedImage.asset('assets/imgs/carrot_intro.png'),
+                      ExtendedImage.asset('assets/imgs/logo.png'),
                       // Stack 안에서만 사용 가능함
                       /*Positioned(
                           // 가로 세로 길이 설정, 사이즈 설정
@@ -67,8 +68,8 @@ class IntroPage extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6,
                 ),*/
                 Text(
-                  '배달을 반하다는 배달비를 나누는 어플입니다.\n'
-                  '자신의 위치를 설정하고 시작해보세요',
+                  '배달비 걱정 없는 배달비 공유 플랫폼\n'
+                  '배달비와 최소 주문 걱정 없이 지금 시작해보세요.',
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 Column(
@@ -91,7 +92,7 @@ class IntroPage extends StatelessWidget {
                         style: TextButton.styleFrom(
                             backgroundColor: Theme.of(context).primaryColor),
                         child: Text(
-                          '내 동네 설정하고 시작하기',
+                          '시작 하기',
                           style: Theme.of(context).textTheme.button,
                         ),
                       ),

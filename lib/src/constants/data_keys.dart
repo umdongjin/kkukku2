@@ -10,6 +10,11 @@ const DOC_PHONENUMBER = 'phoneNumber';
 const DOC_ADDRESS = 'address';
 const DOC_LAT = 'lat';
 const DOC_LON = 'lon';
+const DOC_MEETTIME = 'meettime';
+const DOC_ITEM_MEETTIME = 'itemMeetTime';
+const DOC_ITEMPLACE = 'itemPlace';
+const DOC_PLACE = 'place';
+
 const DOC_GEOFIREPOINT = 'geoFirePoint';
 const DOC_GEOPOINT = 'geopoint';
 const DOC_CREATEDDATE = 'createdDate';

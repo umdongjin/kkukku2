@@ -18,7 +18,6 @@ import '../../states/category_controller.dart';
 import '../../states/select_image_controller.dart';
 import '../../constants/common_size.dart';
 import '../../widgets/warning_dialog.dart';
-import '../home/items_screen.dart';
 import 'multi_image_select.dart';
 
 class InputScreen extends StatefulWidget {
@@ -45,6 +44,8 @@ class _InputScreenState extends State<InputScreen> {
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _detailController = TextEditingController();
+  final TextEditingController _placeController = TextEditingController();
+  final TextEditingController _meettimeController = TextEditingController();
   final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
   AutovalidateMode autoValidate = AutovalidateMode.disabled;
 
@@ -53,6 +54,8 @@ class _InputScreenState extends State<InputScreen> {
     _priceController.dispose();
     _titleController.dispose();
     _detailController.dispose();
+    _placeController.dispose();
+    _meettimeController.dispose();
     super.dispose();
   }
 ///////////////////////////////////////////////////////////////
@@ -104,11 +107,15 @@ class _InputScreenState extends State<InputScreen> {
       userKey: userKey,
       userPhone: userPhone,
       imageDownloadUrls: downloadUrls,
+      //
+      place :_placeController.text,
       title: _titleController.text,
+      detail: _detailController.text,
+      meettime: _meettimeController.text,
+      //
       category: CategoryController.to.currentCategoryInEng,
       price: price ?? 0,
       negotiable: _suggestPriceSelected,
-      detail: _detailController.text,
       address: UserController.to.userModel.value!.address,
       //userNotifier.userModel!.address,
       geoFirePoint: UserController.to.userModel.value!.geoFirePoint,
@@ -210,7 +217,7 @@ class _InputScreenState extends State<InputScreen> {
                       ]),
                       controller: _titleController,
                       decoration: InputDecoration(
-                        hintText: '(음식점 이름) 배달비 반띵',
+                        hintText: '(음식점 이름) 건대 치킨 충주 연수점',
                         // padding 으로 하지 않고 처리하는 방법,
                         // contentPadding: const EdgeInsets.symmetric(horizontal: padding_16),
                         border: underLineBorder,
@@ -247,7 +254,7 @@ class _InputScreenState extends State<InputScreen> {
                           child: TextFormField(
                             validator: FormBuilderValidators.compose([
                               FormBuilderValidators.required(
-                                  errorText: '가격은 필수입니다'),
+                                  errorText: '배달비는 필수입니다'),
                             ]),
                             // 숫자만 입력가능하게 설정,
                             keyboardType: TextInputType.number,
@@ -264,7 +271,7 @@ class _InputScreenState extends State<InputScreen> {
                                   mantissaLength: 0, trailingSymbol: ' 원')
                             ],
                             decoration: InputDecoration(
-                              hintText: '가격',
+                              hintText: ' 배달비',
                               prefixIcon: ImageIcon(
                                 const ExtendedAssetImageProvider(
                                     'assets/imgs/won.png'),
@@ -285,7 +292,7 @@ class _InputScreenState extends State<InputScreen> {
                               errorBorder: underLineBorder,
                             ),
                           ),
-                        ),
+                        ), ///배달비
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: padding_16),
@@ -313,15 +320,70 @@ class _InputScreenState extends State<InputScreen> {
                             ),
                           ),
                           style: TextButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            primary: Colors.black45,
+                            foregroundColor: Colors.black45, backgroundColor: Colors.transparent,
                           ),
                         ),
-                      )
+                      )// 배달비 제안
                     ],
+                  ), // 배달비
+                  dividerCustom,
+// 만날 장소 **************************************************
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: padding_16),
+                    child: TextFormField(
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(errorText: '픽업 장소를 정해주세요.'),
+                      ]),
+                      controller: _placeController,
+                      // 엔터 줄바꿈 가능하게, 줄수 제한 없애기,
+                      maxLines: null,
+                      // multiline 설정하면 완료키가 엔터키로 변경됨,
+                      keyboardType: TextInputType.multiline,
+
+                      decoration: InputDecoration(
+                        hintText: '[필수] : 픽업 장소을 적어주세요. ',
+                        contentPadding: const EdgeInsets.symmetric(
+                          // horizontal: padding_16,
+                          vertical: padding_16,
+                        ),
+                        border: underLineBorder,
+                        enabledBorder: underLineBorder,
+                        focusedBorder: underLineBorder,
+                        // error 관련 border 설정
+                        errorBorder: underLineBorder,
+                      ),
+                    ),
                   ),
                   dividerCustom,
-// 올릴 게시글 내용을 작성
+                  // 만날 시간 **************************************************
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: padding_16),
+                    child: TextFormField(
+                      validator: FormBuilderValidators.compose([
+                        FormBuilderValidators.required(errorText: '픽업 시간을 정해주세요.'),
+                      ]),
+                      controller: _meettimeController,
+                      // 엔터 줄바꿈 가능하게, 줄수 제한 없애기,
+                      maxLines: null,
+                      // multiline 설정하면 완료키가 엔터키로 변경됨,
+                      keyboardType: TextInputType.multiline,
+
+                      decoration: InputDecoration(
+                        hintText: '[필수] : 픽업 시간을 적어주세요. ',
+                        contentPadding: const EdgeInsets.symmetric(
+                          // horizontal: padding_16,
+                          vertical: padding_16,
+                        ),
+                        border: underLineBorder,
+                        enabledBorder: underLineBorder,
+                        focusedBorder: underLineBorder,
+                        // error 관련 border 설정
+                        errorBorder: underLineBorder,
+                      ),
+                    ),
+                  ),
+                  dividerCustom,
+                  // 올릴 게시글 내용을 작성 **************************************************
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: padding_16),
                     child: TextFormField(
@@ -335,7 +397,7 @@ class _InputScreenState extends State<InputScreen> {
                       keyboardType: TextInputType.multiline,
 
                       decoration: InputDecoration(
-                        hintText: '가게이름, 만날 장소, 시간 등 간략히 작성해주세요',
+                        hintText: '만날 시간, 세세한 조건등 자유롭게 적어주세요.',
                         contentPadding: const EdgeInsets.symmetric(
                           // horizontal: padding_16,
                           vertical: padding_16,

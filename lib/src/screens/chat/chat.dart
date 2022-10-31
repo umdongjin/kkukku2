@@ -83,7 +83,7 @@ class Chat extends StatelessWidget {
               child: Text(
                 chatModel.msg,
                 style: Theme.of(context).textTheme.bodyText1!
-                    .copyWith(color: Colors.white),
+                    .copyWith(color: Colors.black),
               ),
               padding: const EdgeInsets.symmetric(
                 vertical: 12,

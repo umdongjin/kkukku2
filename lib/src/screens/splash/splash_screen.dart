@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ExtendedImage.asset('assets/imgs/apple.png'),
+            ExtendedImage.asset('assets/imgs/logo.png', width : 200, height : 200),
             const SizedBox(height: 100.0),
             const CircularProgressIndicator(color: Colors.red)
           ],
