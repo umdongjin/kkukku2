@@ -10,7 +10,7 @@ import '../../constants/shared_pref_key.dart';
 import '../../models/address_from_location_model.dart';
 import '../../models/address_model.dart';
 import '../../models/location_from_address_model.dart';
-import '../../utils/logger.dart';
+//import '../../utils/logger.dart';
 import 'address_service.dart';
 import 'google_map_service.dart';
 
@@ -31,7 +31,7 @@ class _AddressPageState extends State<AddressPage> {
   Position? position;
 
   // 국내 임의의 위도/경도 정보를 할당
-  Position fakePosition = Position(
+/*  Position fakePosition = Position(
       latitude: 37.5377469,
       longitude: 126.9643189,
       timestamp: DateTime.now(),
@@ -39,7 +39,7 @@ class _AddressPageState extends State<AddressPage> {
       altitude: 0.0,
       heading: 0.0,
       speed: 0.0,
-      speedAccuracy: 0.0);
+      speedAccuracy: 0.0);*/
 
   // reverse geocoding, 좌표에 주소로 변경시 사용하는 모델
   // AddressFromLocation? myAddress;
@@ -96,19 +96,15 @@ class _AddressPageState extends State<AddressPage> {
         },
       ).then((_) => Navigator.pop(context));
     } else {
-      // 디바이스의 현재 GPS 위치 리턴, 현재는 가짜 위치를 사용중
       await _getGPSLocation();
     }
   }
 
-// 디바이스의 현재 GPS 위치 리턴, 현재는 가짜 위치를 사용중
+// 디바이스의 현재 GPS 위치 리턴
   Future<void> _getGPSLocation() async {
     position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
-    // fake GPS, 현재는 가짜 위치를 사용중
-    position = fakePosition;
-    logger.d('_getGPSLocation(myPosition) : $position');
   }
 
   @override
