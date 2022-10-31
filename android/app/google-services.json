@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "791406703322",
+    "project_id": "kkup-c0615",
+    "storage_bucket": "kkup-c0615.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:791406703322:android:e79efe8e4636ed2fd22be3",
+        "android_client_info": {
+          "package_name": "com.example.kkukku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "791406703322-99cod06ste1a98el23cnlp67ke5uneve.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kkukku",
+            "certificate_hash": "a2029d543bd77219f30974a67bdf439106b8aa35"
+          }
+        },
+        {
+          "client_id": "791406703322-o0c63f4321oen6t9nl7r02i4ev56gc1s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIN5JKOYZqnENuwCWdgur_Gvfr8mmnLoI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "791406703322-o0c63f4321oen6t9nl7r02i4ev56gc1s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
