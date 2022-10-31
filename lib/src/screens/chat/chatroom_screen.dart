@@ -49,7 +49,7 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(),
-          backgroundColor: Colors.grey[200],
+          backgroundColor: Colors.grey[300],///////////////////////////
           // 화면 하단의 메뉴바 때문에 SafeArea 로 wrapping 해야 오동작을 방지함.
           body: SafeArea(
             child: Column(
@@ -132,150 +132,121 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 16, right: 8, top: 8, bottom: 8),
-                child: _chatroomModel.value == null
-                    ? Shimmer.fromColors(
-                        highlightColor: Colors.grey[200]!,
-                        baseColor: Colors.grey,
-                        child: Container(
+          Container(
+            //color: Colors.grey[300], ////////////////
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 16, right: 8, top: 8, bottom: 8),
+                  child: _chatroomModel.value == null
+                      ? Shimmer.fromColors(
+                          highlightColor: Colors.grey[200]!,
+                          baseColor: Colors.grey,
+                          child: Container(
+                            width: 48,
+                            height: 48,
+                            color: Colors.grey[200],
+                          ),
+                        )
+                      : ExtendedImage.network(
+                          _chatroomModel.value!.itemImage,
                           width: 48,
                           height: 48,
-                          color: Colors.white,
+                          fit: BoxFit.cover,
                         ),
-                      )
-                    : ExtendedImage.network(
-                        _chatroomModel.value!.itemImage,
-                        width: 48,
-                        height: 48,
-                        fit: BoxFit.cover,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
+                        // todo: 거래완료 여부 확인 필드 추가
+                        text: TextSpan(
+                            text: '제목 :',
+                            style: Theme.of(context).textTheme.bodyText1,
+                            children: [
+                              TextSpan(
+                                  text: _chatroomModel.value == null
+                                      ? ''
+                                      : ' ' + _chatroomModel.value!.itemTitle,
+                                  // text: ' 복숭아 떨이',
+                                  style: Theme.of(context).textTheme.bodyText2)
+                            ]),
                       ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RichText(
-                      // todo: 거래완료 여부 확인 필드 추가
-                      text: TextSpan(
-                          text: '제목 :',
-                          style: Theme.of(context).textTheme.bodyText1,
-                          children: [
-                            TextSpan(
+                      SizedBox(
+                        height:2,
+                      ),
+                      RichText( // 픽업 장소
+                        text: TextSpan(
+                            text: '장소: ',
+                            style: Theme.of(context).textTheme.bodyText1,
+                            children: [
+                              TextSpan(
+                                  text: _chatroomModel.value == null
+                                      ? ''
+                                      : ' ' + _chatroomModel.value!.itemPlace,//////////////
+                                  // text: ' 복숭아 떨이',
+                                  style: Theme.of(context).textTheme.bodyText2)
+                            ]),
+                      ),
+                      SizedBox(
+                        height:2,
+                      ),
+                      RichText( // 픽업 시간
+                        text: TextSpan(
+                            text: '시간: ',
+                            style: Theme.of(context).textTheme.bodyText1,
+                            children: [
+                              TextSpan(
+                                  text: _chatroomModel.value == null
+                                      ? ''
+                                      : ' ' + _chatroomModel.value!.itemMeetTime ,//////////////
+                                  // text: ' 복숭아 떨이',
+                                  style: Theme.of(context).textTheme.bodyText2)
+                            ]),
+                      ),
+                      SizedBox(
+                        height:2,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                            text: _chatroomModel.value == null
+                                ? ''
+                                : '배달료: ' + _chatroomModel.value!.itemPrice.toCurrencyString(
+                                    mantissaLength: 0, trailingSymbol: '원'),
+                            style: Theme.of(context).textTheme.bodyText1,
+                            children: [
+                              TextSpan(
                                 text: _chatroomModel.value == null
                                     ? ''
-                                    : ' ' + _chatroomModel.value!.itemTitle,
-                                // text: ' 복숭아 떨이',
-                                style: Theme.of(context).textTheme.bodyText2)
-                          ]),
-                    ),
-                    SizedBox(
-                      height:2,
-                    ),
-                    RichText( // 픽업 장소
-                      text: TextSpan(
-                          text: '장소: ',
-                          style: Theme.of(context).textTheme.bodyText1,
-                          children: [
-                            TextSpan(
-                                text: _chatroomModel.value == null
-                                    ? ''
-                                    : ' ' + _chatroomModel.value!.itemPlace,//////////////
-                                // text: ' 복숭아 떨이',
-                                style: Theme.of(context).textTheme.bodyText2)
-                          ]),
-                    ),
-                    SizedBox(
-                      height:2,
-                    ),
-                    RichText( // 픽업 시간
-                      text: TextSpan(
-                          text: '시간: ',
-                          style: Theme.of(context).textTheme.bodyText1,
-                          children: [
-                            TextSpan(
-                                text: _chatroomModel.value == null
-                                    ? ''
-                                    : ' ' + _chatroomModel.value!.itemMeetTime ,//////////////
-                                // text: ' 복숭아 떨이',
-                                style: Theme.of(context).textTheme.bodyText2)
-                          ]),
-                    ),
-                    SizedBox(
-                      height:2,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                          text: _chatroomModel.value == null
-                              ? ''
-                              : '배달료: ' + _chatroomModel.value!.itemPrice.toCurrencyString(
-                                  mantissaLength: 0, trailingSymbol: '원'),
-                          style: Theme.of(context).textTheme.bodyText1,
-                          children: [
-                            TextSpan(
-                              text: _chatroomModel.value == null
-                                  ? ''
-                                  : _chatroomModel.value!.negotiable
-                                      ? '  (배달비제안가능)'
-                                      : '  (배달비제안불가)',
-                              style: _chatroomModel.value == null
-                                  ? Theme.of(context)
-                                      .textTheme
-                                      .bodyText2!
-                                      .copyWith(color: Colors.black26)
-                                  : _chatroomModel.value!.negotiable
-                                      ? Theme.of(context)
-                                          .textTheme
-                                          .bodyText2!
-                                          .copyWith(color: Colors.blue)
-                                      : Theme.of(context)
-                                          .textTheme
-                                          .bodyText2!
-                                          .copyWith(color: Colors.black26),
-                            )
-                          ]),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          /*Padding(
-            padding: const EdgeInsets.only(left: 16, bottom: 8),
-            // 버튼 사이즈를 줄이기 위해서 SizedBox 추가
-            child: SizedBox(
-              height: 32,
-              child: TextButton.icon(
-                onPressed: () {
-                  debugPrint('');
-                },
-                icon: const Icon(
-                  Icons.edit,
-                  // 버튼 사이즈를 줄이기 위해서 size 추가 설정,
-                  size: 16,
-                  color: Colors.black87,
-                ),
-                label: Text(
-                  '',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.black87),
-                ),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    side: BorderSide(color: Colors.grey[300]!, width: 2),
+                                    : _chatroomModel.value!.negotiable
+                                        ? '  (배달비제안가능)'
+                                        : '  (배달비제안불가)',
+                                style: _chatroomModel.value == null
+                                    ? Theme.of(context)
+                                        .textTheme
+                                        .bodyText2!
+                                        .copyWith(color: Colors.black26)
+                                    : _chatroomModel.value!.negotiable
+                                        ? Theme.of(context)
+                                            .textTheme
+                                            .bodyText2!
+                                            .copyWith(color: Colors.blue)
+                                        : Theme.of(context)
+                                            .textTheme
+                                            .bodyText2!
+                                            .copyWith(color: Colors.black26),
+                              )
+                            ]),
+                      ),
+                    ],
                   ),
                 ),
-              ),
+              ],
             ),
-          ),*/
+          ),
         ],
       ),
     );
@@ -286,18 +257,21 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
       height: 48,
       child: Row(
         children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.add,
-              color: Colors.grey,
-            ),
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: const Icon(
+          //     Icons.add,
+          //     color: Colors.grey,
+          //   ),
+          // ),
+          SizedBox(
+            width:10,
           ),
           Expanded(
             child: TextFormField(
               controller: _textEditingController,
               decoration: InputDecoration(
-                hintText: '메시지를 입력하세요',
+                hintText: '   메시지를 입력하세요',
                 // 메시지 입력박스를 조금 작게 줄임,
                 isDense: true,
                 // fillColor & filled 동시에 설정해야함.
@@ -307,10 +281,10 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                   onTap: () {
                     logger.d('Icon clicked');
                   },
-                  child: const Icon(
-                    Icons.emoji_emotions_outlined,
-                    color: Colors.grey,
-                  ),
+                  // child: const Icon(
+                  //   Icons.emoji_emotions_outlined,
+                  //   color: Colors.grey,
+                  // ),
                 ),
                 // 아이콘때문에 입력 박스가 커져서 줄여줌 설정,
                 suffixIconConstraints: BoxConstraints.tight(const Size(40, 40)),
@@ -322,6 +296,9 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
                 ),
               ),
             ),
+          ),
+          SizedBox(
+            width: 10,
           ),
           IconButton(
             onPressed: () async {
@@ -342,7 +319,11 @@ class _ChatroomScreenState extends State<ChatroomScreen> {
               Icons.send,
               color: Colors.grey,
             ),
-          )
+          ),
+          SizedBox(
+            width: 10,
+          ),
+
         ],
       ),
     );

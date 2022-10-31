@@ -67,14 +67,13 @@ class Chat extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ExtendedImage.network(
-          'https://randomuser.me/api/portraits/women/26.jpg',
-          width: 36,
-          height: 36,
-          fit: BoxFit.cover,
-          borderRadius: BorderRadius.circular(10),
-          shape: BoxShape.rectangle,
-        ),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Image.asset('assets/imgs/users.jpg',
+            width: 37,
+            height: 37,
+          ),
+        ),// AssetImage(
         const SizedBox(width: 8),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -94,7 +93,7 @@ class Chat extends StatelessWidget {
                 maxWidth: size.width * 0.55,
               ),
               decoration: BoxDecoration(
-                color: Colors.grey[300]!,
+                color: Colors.white!,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(2),
                   topRight: roundedCorner,
