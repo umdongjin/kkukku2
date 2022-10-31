@@ -10,7 +10,7 @@ import '../../constants/shared_pref_key.dart';
 import '../../models/address_from_location_model.dart';
 import '../../models/address_model.dart';
 import '../../models/location_from_address_model.dart';
-//import '../../utils/logger.dart';
+import '../../utils/logger.dart';
 import 'address_service.dart';
 import 'google_map_service.dart';
 
@@ -96,6 +96,7 @@ class _AddressPageState extends State<AddressPage> {
         },
       ).then((_) => Navigator.pop(context));
     } else {
+      // 디바이스의 현재 GPS 위치 리턴, 현재는 가짜 위치를 사용중
       await _getGPSLocation();
     }
   }

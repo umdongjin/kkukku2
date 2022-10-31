@@ -98,7 +98,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
                       Text(_item.title,
                           style: Theme.of(context).textTheme.subtitle1),
                       SizedBox(
-                        height: 3,
+                        height: 4,
                       ),
                       Text(
                         TimeCalculation.getTimeDiff(_item.createdDate),
@@ -106,15 +106,15 @@ class _ItemsScreenState extends State<ItemsScreen> {
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                       SizedBox(
-                        height: 3,
+                        height: 7,
                       ),
                       Text('배달료: ' + _item.price.toString() + '원'),
                       SizedBox(
-                        height: 3,
+                        height: 4,
                       ),
                       Text('픽업 장소: ' + _item.place),
                       SizedBox(
-                        height: 3,
+                        height: 4,
                       ),
                       Text('픽업 시간: ' + _item.meettime),
                       // 금액과 하트 사이에 공백을 최대한 주기위해서 Expanded 사용함,

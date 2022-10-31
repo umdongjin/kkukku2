@@ -49,20 +49,20 @@ class ChatListPage extends StatelessWidget {
                       // context.beamToNamed('/${chatroomModel.chatroomKey}');
                     },
                     // 작성자 이미지가 없으므로 임시 이미지로 표시
-                    leading: ExtendedImage.network(
-                      'https://picsum.photos/200',
-                      height: _size.height / 8,
-                      width: _size.width / 8,
-                      fit: BoxFit.cover,
-                      shape: BoxShape.circle,
-                    ),
+                    // leading: ExtendedImage.network(
+                    //   'https://picsum.photos/200',
+                    //   height: _size.height / 8,
+                    //   width: _size.width / 8,
+                    //   fit: BoxFit.cover,
+                    //   shape: BoxShape.circle,
+                    // ),
                     // 제품 이미지 표시
-                    trailing: ExtendedImage.network(
+                    leading: ExtendedImage.network(
                       chatroomModel.itemImage,
                       height: _size.height / 8,
                       width: _size.width / 8,
                       fit: BoxFit.cover,
-                      shape: BoxShape.rectangle,
+                      shape: BoxShape.circle,
                       borderRadius: BorderRadius.circular(4),
                     ),
                     // title: RichText(

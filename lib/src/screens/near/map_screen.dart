@@ -154,7 +154,11 @@ class _MapScreenState extends State<MapScreen> {
         final middleOnScreen = Offset(_size.width / 2, _size.height / 2);
         // x/y 좌표 체크.
         final List centerLocationWidget = [
+<<<<<<< HEAD
           _buildMarkerWidget(middleOnScreen, color: Colors.red),
+=======
+          _buildMarkerWidget(middleOnScreen, color: Colors.black87),
+>>>>>>> f26f9d12d89efe48f2d584b8ca549dfcd45036ac
           _buildMarkerWidget(const Offset(0, 0), color: Colors.black87),
           _buildMarkerWidget(Offset(_size.width - 20, 0),
               color: Colors.black87),
@@ -220,5 +224,113 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
+<<<<<<< HEAD
+=======
+// ------------------- 테스트 데이터 자동 입력 코드 -------------------
+
+// Future<List<String>> generateData(
+//     String userKey, GeoFirePoint geoFirePoint) async {
+//   List<String> itemKeys = [];
+//
+//   DateTime now = DateTime.now().toUtc();
+//   const numOfItem = 15;
+//   await FirebaseFirestore.instance.runTransaction((Transaction tx) async {
+//     for (int i = 0; i < numOfItem; i++) {
+//       final String itemKey = ItemModel2.generateItemKey(userKey);
+//       logger.d('RandomeData - $itemKey');
+//       itemKeys.add(itemKey);
+//       final DocumentReference postRef =
+//       FirebaseFirestore.instance.collection(COL_ITEMS).doc(itemKey);
+//
+//       final DocumentReference userItemDocReference = FirebaseFirestore
+//           .instance
+//           .collection(COL_USERS)
+//           .doc(userKey)
+//           .collection(COL_USER_ITEMS)
+//           .doc(itemKey);
+//
+//       var rng = Random();
+//       GeoPoint geoPoint = geoFirePoint.data['geopoint'];
+//       final newGeoData = GeoFirePoint(
+//           geoPoint.latitude + (0.001 * (rng.nextInt(100) - 50)),
+//           geoPoint.longitude + (0.001 * (rng.nextInt(100) - 50)));
+//
+//       ItemModel2 item = ItemModel2(
+//         userKey: userKey,
+//         itemKey: itemKey,
+//         userPhone: widget._userModel.phoneNumber, //'+821040155592',
+//         imageDownloadUrls: ['https://picsum.photos/200'],
+//         title: 'second + ${i+1}',
+//         category: categoriesMapEngToKor.keys
+//             .elementAt(i % categoriesMapEngToKor.keys.length),
+//         price: 100 * i,
+//         negotiable: i % 2 == 0,
+//         detail: 'second detail + ${i+1}',
+//         address: 'second address + ${i+1}',
+//         geoFirePoint: newGeoData,
+//         createdDate: now.subtract(Duration(days: i)),
+//       );
+//
+//       tx.set(postRef, item.toJson());
+//       tx.set(userItemDocReference, item.toMinJson());
+//     }
+//   });
+//   return itemKeys;
+// }
+//
+// final List<String> nouns = [
+//   'time',
+//   'year',
+//   'people',
+//   'way',
+//   'day',
+//   'man',
+//   'thing',
+//   'woman',
+//   'life',
+//   'child',
+//   'world',
+//   'school',
+//   'state',
+//   'family',
+//   'student',
+//   'group',
+//   'country',
+//   'problem',
+//   'hand',
+//   'part',
+//   'place',
+//   'case',
+//   'week',
+//   'company',
+//   'system',
+//   'program',
+//   'question',
+//   'work',
+//   'government',
+//   'number',
+//   'night',
+//   'point',
+//   'home',
+//   'water',
+//   'room',
+//   'mother',
+//   'area',
+//   'money',
+//   'story',
+//   'fact',
+//   'month',
+//   'lot',
+//   'right',
+//   'study',
+//   'book',
+//   'eye',
+//   'job',
+//   'word',
+//   'business'
+// ];
+
+// ------------------- 테스트 데이터 자동 입력 코드 -------------------
+>>>>>>> f26f9d12d89efe48f2d584b8ca549dfcd45036ac
 
 }

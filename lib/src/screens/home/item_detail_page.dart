@@ -170,7 +170,6 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         child: Padding(
                           padding: const EdgeInsets.all(padding_08),
                           child: Row(  //본문
-
                             children: [
                               const VerticalDivider(
                                 width: padding_08 * 2 + 1,
@@ -181,8 +180,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                                     itemModel.title,
                                     style: TextStyle(fontSize: 15, color: Colors.black),
                                   ),
-                                  SizedBox(
-                                    width: 30,
+                                  const SizedBox(
+                                    width: 20,
                                   ),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -262,7 +261,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                                 style: Theme.of(context).textTheme.caption,
                               ),
                               _textGap,
-                              Text("픽업 시간: ${itemModel.meettime} 시",//////////////////////////// 픽업 시간
+                              Text("픽업 시간: ${itemModel.meettime}",//////////////////////////// 픽업 시간
                                 style: Theme.of(context).textTheme.caption,
                               ),
 

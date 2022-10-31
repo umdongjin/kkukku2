@@ -36,24 +36,24 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         // centerTitle: true,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text("배달을 반하다",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)
-                    ),
                   SizedBox(
-                    width: 10,
+                    width: 5,
                   ),
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text("ID:  " + UserController.to.userModel.value!.phoneNumber,
-                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
-                      ),
-                    ],
-                  ),
+                  Text("배달을 반하다",
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
+                    ),
+                  // Column(
+                  //   children: [
+                  //     SizedBox(
+                  //       height: 10,
+                  //     ),
+                  //     Text("ID:  " + UserController.to.userModel.value!.phoneNumber,
+                  //         style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold)
+                  //     ),
+                  //   ],
+                  // ),
 
                 ],
         ),
